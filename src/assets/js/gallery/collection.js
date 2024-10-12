@@ -1,64 +1,57 @@
 const collection = {
-  artObjects: [],
+  apiKey : import.meta.env.VITE_API_KEY,
 
   init(){
     this.getData();
   },
 
-  getData() {
+  async getData() {
     const baseUrl = 'https://www.rijksmuseum.nl/api',
-          apiKey = import.meta.env.VITE_API_KEY,
+          apiKey = this.apiKey,
           culture = "en",
           ps = 5,
           url = `${baseUrl}/${culture}/collection?key=${apiKey}&ps=${ps}`;
 
-    fetch(url)
-    .then(response => {
+    try {
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.json();
-    })
-    .then(data => {
+      const data = await response.json();
+
       if (!data || !data.artObjects) {
         throw new Error("Invalid data");
       }
 
-      this.artObjects.push(...data.artObjects);
-
-      if (this.artObjects.length > 0) {
-        this.artObjects.forEach(art => {
-          console.log(art);
-
-          this.getDetailsData(art.id)
-        });
+      for (const art of data.artObjects) {
+        await this.getDetailsData(art.objectNumber);
       }
-
-    })
-    .catch(error => {
-      this.handleFetchingError(error)
-    });
+    } catch (error) {
+      this.handleFetchingError(error);
+    }
   },
 
-  getDetailsData(artId) {
+  async getDetailsData(artId) {
     const baseUrl = 'https://www.rijksmuseum.nl/api',
-          apiKey = import.meta.env.VITE_API_KEY,
+          apiKey = this.apiKey,
           culture = "en",
           url = `${baseUrl}/${culture}/collection/${artId}?key=${apiKey}`;
 
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(detailData => {
-        this.showDetails(detailData.artObject);
-      })
-      .catch(error => {
-        this.handleFetchingError(error)
-      });
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const detailData = await response.json();
+
+      if (!detailData || !detailData.artObject) {
+        throw new Error("Invalid data");
+      }
+
+      this.showArt(detailData.artObject);
+    } catch (error) {
+      this.handleFetchingError(error);
+    }
   },
 
   handleFetchingError(error){
@@ -69,9 +62,25 @@ const collection = {
     flashContent.textContent = `An error occurred during data fetching : ${error.message}`;
   },
 
-  showDetails(data){
-    console.log(data)
-  }
+  showArt(data){
+    const template = document.querySelector('template');
+    const target = document.querySelector('.gallery');
+
+    const container = template.content.cloneNode(true)
+
+    container.querySelector('.art').setAttribute('id', data.id);
+
+    const image = container.querySelector('img');
+    image.src = data.webImage.url;
+
+    const title = container.querySelector('.art__title');
+    title.innerText = data.title;
+
+    const description = container.querySelector('.art__description');
+    description.innerText = data.description || "No description available.";
+
+    target.appendChild(container);
+  },
 }
 
 export default collection;
