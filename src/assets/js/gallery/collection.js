@@ -5,11 +5,11 @@ const collection = {
   },
 
   getData() {
-    const baseUrl = 'https://www.rijksmuseum.nl/api/nl/collection',
+    const baseUrl = 'https://www.rijksmuseum.nl/api',
           apiKey = import.meta.env.VITE_API_KEY,
           culture = "en",
           ps = 10,
-          url = `${baseUrl}?key=${apiKey}&culture=${culture}&ps=${ps}`;
+          url = `${baseUrl}/${culture}/collection?key=${apiKey}&ps=${ps}`;
 
     fetch(url)
     .then(response => {
