@@ -71,10 +71,10 @@ const collection = {
     container.querySelector('.art').setAttribute('id', data.id);
 
     const image = container.querySelector('img');
-    image.src = data.webImage.url;
+    image.src = data.webImage.url || "";
 
     const title = container.querySelector('.art__title');
-    title.innerText = data.title;
+    title.innerText = data.title || "No title";
 
     const description = container.querySelector('.art__description');
     description.innerText = data.description || "No description available.";
