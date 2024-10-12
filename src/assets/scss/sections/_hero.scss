@@ -1,0 +1,22 @@
+.hero{
+  height: 100vh;
+  background-color: $color-black;
+  color: $color-white;
+  display: flex;
+  align-items: end;
+
+  &__content{
+    display: flex;
+    align-items: end;
+    padding: 0 0 $spacing-lg $spacing-lg;
+
+    .hero__title{
+      font-size: $f-size-huge;
+    }
+
+    .hero__indication{
+      font-weight: 300;
+      transform: translateY(-200%);
+    }
+  }
+}

@@ -11,21 +11,32 @@
   <body>
     <div class="flash"><span></span></div>
     <main>
-      <template>
-        <section class="art" id="">
-          <div class="art__image">
-            <img src="" alt="">
+      <section class="hero">
+        <div class="hero__content">
+          <h1 class="hero__title">Gallery</h1> <span class="hero__indication">scroll to discover</span>
+        </div>
+      </section>
+      <section class="gallery">
+        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper">
+          <div class="swiper-wrapper">
           </div>
-          <div class="art__main-info">
-            <h2 class="art__title"></h2>
-          </div>
-          <div class="art__side-content">
-            <p class="art__description"></p>
-          </div>
-        </section>
-      </template>
-
-      <div class="gallery"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
     </main>
+
+    <template>
+      <div class="swiper-slide art" id="">
+        <div class="art__image">
+          <img src="" alt="">
+        </div>
+        <div class="art__main-info">
+          <h2 class="art__title"></h2>
+        </div>
+        <div class="art__side-content">
+          <p class="art__description"></p>
+        </div>
+      </div>
+    </template>
   </body>
 </html>

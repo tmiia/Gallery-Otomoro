@@ -1,5 +1,8 @@
+import swiper from "./swiper";
+
 const collection = {
   apiKey : import.meta.env.VITE_API_KEY,
+  nbArt: 5,
 
   init(){
     this.getData();
@@ -9,7 +12,7 @@ const collection = {
     const baseUrl = 'https://www.rijksmuseum.nl/api',
           apiKey = this.apiKey,
           culture = "en",
-          ps = 5,
+          ps = this.nbArt,
           url = `${baseUrl}/${culture}/collection?key=${apiKey}&ps=${ps}`;
 
     try {
@@ -64,7 +67,7 @@ const collection = {
 
   showArt(data){
     const template = document.querySelector('template');
-    const target = document.querySelector('.gallery');
+    const target = document.querySelector('.swiper-wrapper');
 
     const container = template.content.cloneNode(true)
 
@@ -80,7 +83,17 @@ const collection = {
     description.innerText = data.description || "No description available.";
 
     target.appendChild(container);
+
+    this.addSwiper()
   },
+
+  addSwiper(){
+    const slide = document.querySelectorAll('.swiper-slide');
+
+    if (slide.length === this.nbArt) {
+      swiper.init();
+    }
+  }
 }
 
 export default collection;
