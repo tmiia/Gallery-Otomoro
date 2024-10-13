@@ -2,6 +2,12 @@ html, body{
   scroll-behavior: smooth;
 }
 
+html{
+  &.no-scroll{
+    overflow-y: hidden;
+  }
+}
+
 main{
   position: relative;
   background: rgb(89,89,89);

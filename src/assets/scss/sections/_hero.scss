@@ -42,6 +42,15 @@
         max-width: 15ch;
       }
     }
+
+    &__blank{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: $color-black;
+    }
   }
 
   @media only screen and (max-width : $breakpoint-md) {
