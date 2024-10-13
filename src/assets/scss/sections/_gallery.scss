@@ -82,5 +82,18 @@
     &__content{
       padding: $spacing-md;
     }
+
+    &__collection{
+      width: 100%;
+      grid-template-columns: repeat(4, 1fr);
+
+      & > *:nth-child(odd) {
+        grid-column: 2 / 5;
+      }
+
+      & > *:nth-child(even) {
+        grid-column: 1 / 4;
+      }
+    }
   }
 }
