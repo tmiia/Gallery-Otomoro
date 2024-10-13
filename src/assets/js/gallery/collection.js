@@ -65,7 +65,7 @@ const collection = {
 
   showArt(data){
     const template = document.querySelector('template');
-    const target = document.querySelector('.gallery');
+    const target = document.querySelector('.gallery__collection');
 
     const container = template.content.cloneNode(true)
 
