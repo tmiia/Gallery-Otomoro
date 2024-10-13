@@ -1,0 +1,24 @@
+.scroll-down{
+  justify-content: center;
+  align-items: center;
+
+  &__link{
+    width: fit-content;
+    height: fit-content;
+    animation: bounce 1s infinite alternate-reverse ease-in-out;
+
+    img{
+      width: pxToRem(24);
+      height: pxToRem(24);
+    }
+  }
+}
+
+@keyframes bounce {
+  0%{
+    transform: translateY(-10%);
+  }
+  100%{
+    transform: translateY(10%);
+  }
+}
