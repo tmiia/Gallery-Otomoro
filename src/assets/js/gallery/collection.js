@@ -25,8 +25,9 @@ const collection = {
       }
 
       for (const art of data.artObjects) {
-        await this.getDetailsData(art.objectNumber);
+        this.showArt(art);
       }
+
     } catch (error) {
       this.handleFetchingError(error);
     }
@@ -49,7 +50,8 @@ const collection = {
         throw new Error("Invalid data");
       }
 
-      this.showArt(detailData.artObject);
+      this.showDetail(detailData.artObject);
+
     } catch (error) {
       this.handleFetchingError(error);
     }
@@ -69,18 +71,29 @@ const collection = {
 
     const container = template.content.cloneNode(true)
 
-
     const image = container.querySelector('img');
     image.src = data.webImage.url || "";
 
-    // const title = container.querySelector('.art__title');
-    // title.innerText = data.title || "No title";
-
-    // const description = container.querySelector('.art__description');
-    // description.innerText = data.description || "No description available.";
+    image.addEventListener('click', ()=>{
+      this.getDetailsData(data.objectNumber);
+    })
 
     target.appendChild(container);
   },
+
+  showDetail(data){
+    const tag = document.querySelector(".gallery__content__tag");
+    tag.innerText = `${data.materials.map(item => item.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')).join(" / ")}`;
+
+    const title = document.querySelector(".gallery__content__title");
+    title.innerText = data.principalOrFirstMaker || 'Unknown';
+
+    const description = document.querySelector(".gallery__content__description");
+    description.innerText = data.label.description || 'No description available';
+
+    const date = document.querySelector(".gallery__content__date");
+    date.innerText = data.dating.presentingDate || 'Date not available';
+  }
 }
 
 export default collection;
