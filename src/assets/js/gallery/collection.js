@@ -59,10 +59,6 @@ const collection = {
 
   handleFetchingError(error){
     console.error('There was a problem with the fetch operation:', error);
-    const flashContainer = document.querySelector('.flash');
-    const flashContent = flashContainer.querySelector('span');
-    flashContainer.classList.add('error');
-    flashContent.textContent = `An error occurred during data fetching : ${error.message}`;
   },
 
   showArt(data){
