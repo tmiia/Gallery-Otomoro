@@ -1,5 +1,3 @@
-import swiper from "./swiper";
-
 const collection = {
   apiKey : import.meta.env.VITE_API_KEY,
   nbArt: 5,
@@ -67,7 +65,7 @@ const collection = {
 
   showArt(data){
     const template = document.querySelector('template');
-    const target = document.querySelector('.swiper-wrapper');
+    const target = document.querySelector('.gallery');
 
     const container = template.content.cloneNode(true)
 
@@ -83,17 +81,7 @@ const collection = {
     description.innerText = data.description || "No description available.";
 
     target.appendChild(container);
-
-    this.addSwiper()
   },
-
-  addSwiper(){
-    const slide = document.querySelectorAll('.swiper-slide');
-
-    if (slide.length === this.nbArt) {
-      swiper.init();
-    }
-  }
 }
 
 export default collection;
