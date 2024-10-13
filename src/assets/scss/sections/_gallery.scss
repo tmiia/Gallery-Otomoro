@@ -69,17 +69,14 @@
         &.inactive{
           -webkit-filter: grayscale(70%);
           filter: grayscale(70%);
+          opacity: 0.8;
         }
 
         &.active{
           -webkit-filter: grayscale(0%);
           filter: grayscale(0%);
+          opacity: 1;
         }
-      }
-
-      &:hover {
-        transform: scale(1.05);
-        width: 100%;
       }
     }
   }
@@ -107,6 +104,17 @@
 
       & > *:nth-child(even) {
         grid-column: 1 / 4;
+      }
+    }
+  }
+
+  @media screen and (min-width : $breakpoint-md) {
+    &__collection{
+      &__art__image {
+        &:hover {
+          transform: scale(1.05);
+          width: 100%;
+        }
       }
     }
   }
