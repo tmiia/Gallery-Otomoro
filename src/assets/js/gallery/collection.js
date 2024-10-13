@@ -72,6 +72,7 @@ const collection = {
 
     image.addEventListener('click', ()=>{
       this.getDetailsData(data.objectNumber);
+      this.focusingArt(image);
     })
 
     target.appendChild(container);
@@ -89,6 +90,17 @@ const collection = {
 
     const date = document.querySelector(".gallery__content__date");
     date.innerText = data.dating.presentingDate || 'Date not available';
+  },
+
+  focusingArt(currentImage){
+    const images = document.querySelectorAll('.gallery__collection__art__image img');
+
+    images.forEach(image => {
+      image.classList.remove('active');
+      image.classList.add('inactive');
+    });
+
+    currentImage.classList.add('active');
   }
 }
 
