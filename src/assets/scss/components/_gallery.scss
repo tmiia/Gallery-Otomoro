@@ -4,21 +4,51 @@
   grid-template-rows: repeat(4, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  max-height: 100vh;
+  height: 100vh;
 
   &__content{
-    z-index: $z-index-medium;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     grid-column-start: 2;
     grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 4;
+
+    color: $color-white;
+
+    &__tag{
+      font-style: italic;
+    }
+
+    &__description{
+      width: 90%;
+    }
+
+    &__tag, &__description{
+      font-size: $f-size-sm;
+      font-weight: 300;
+    }
+
+    &__title{
+      font-size: $f-size-xxl;
+      font-weight: 600;
+    }
+
+    &__date{
+      font-size: $f-size-lg;
+    }
   }
 
   &__collection{
     grid-column-start: 6;
     grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: end;
   }
 
   &__content, &__collection{
-    grid-row-start: 1;
-    grid-row-end: end;
+    z-index: $z-index-medium;
   }
 }
