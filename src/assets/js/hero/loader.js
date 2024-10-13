@@ -6,6 +6,7 @@ const loader = {
   grid : undefined,
 
   init(){
+    scrollTo(0, 0)
     this.blank = document.querySelectorAll('.hero__cell__blank');
 
     this.grid = [4,8];
