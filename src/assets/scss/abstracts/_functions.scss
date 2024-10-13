@@ -2,6 +2,6 @@
 $base-size: 16;
 
 @function pxToRem($value) {
-  $remValue: ($value / $base-size) + rem;
-  @return $remValue;
+  $remValue: calc($value / $base-size);
+  @return #{$remValue}rem;
 }
