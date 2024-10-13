@@ -74,4 +74,13 @@
   &__content, &__collection{
     z-index: $z-index-medium;
   }
+
+  @media only screen and (max-width : $breakpoint-md) {
+    display: flex;
+    flex-direction: column;
+
+    &__content{
+      padding: $spacing-md;
+    }
+  }
 }
