@@ -1,8 +1,10 @@
 const collection = {
   apiKey : import.meta.env.VITE_API_KEY,
   nbArt: 5,
+  gsapAttribute: undefined,
 
-  init(){
+  init(gsap){
+    this.gsapAttribute = gsap;
     this.getData();
   },
 
@@ -51,6 +53,7 @@ const collection = {
       }
 
       this.showDetail(detailData.artObject);
+      this.animShowContent();
 
     } catch (error) {
       this.handleFetchingError(error);
@@ -70,10 +73,7 @@ const collection = {
     const image = container.querySelector('img');
     image.src = data.webImage.url || "";
 
-    image.addEventListener('click', ()=>{
-      this.getDetailsData(data.objectNumber);
-      this.focusingArt(image);
-    })
+    this.onArtClick(image, data);
 
     target.appendChild(container);
   },
@@ -101,6 +101,34 @@ const collection = {
     });
 
     currentImage.classList.add('active');
+  },
+
+  onArtClick(image, data){
+    image.addEventListener('click', ()=>{
+      this.animHideContent(data);
+      this.focusingArt(image);
+    })
+  },
+
+  animHideContent(data){
+    const tl = this.gsapAttribute.timeline({
+      ease: "power1.out",
+      onComplete: () => this.getDetailsData(data.objectNumber)
+    });
+
+    tl.to(".gallery__content__description", {yPercent: 10, opacity: 0, duration: 0.25});
+    tl.to(".gallery__content__title", {yPercent: 10, opacity: 0, duration: 0.25}, "-=0.15");
+    tl.to(".gallery__content__date", {yPercent: 10, opacity: 0, duration: 0.25}, "<");
+    tl.to(".gallery__content__tag", {opacity: 0, duration: 0.25}, "<");
+  },
+
+  animShowContent(){
+    const tl = this.gsapAttribute.timeline({delay: 0.15, ease: "power1.inOut"});
+
+    tl.to(".gallery__content__description", {yPercent: 0, opacity: 1, duration: 0.25});
+    tl.to(".gallery__content__title", {yPercent: 0, opacity: 1, duration: 0.25}, "-=0.15");
+    tl.to(".gallery__content__date", {yPercent: 0, opacity: 1, duration: 0.25}, "<");
+    tl.to(".gallery__content__tag", {opacity: 1, duration: 0.25}, "<");
   }
 }
 

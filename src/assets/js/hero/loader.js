@@ -1,11 +1,9 @@
-import gsap from "gsap";
-
 const loader = {
   blank : undefined,
   tl : undefined,
   grid : undefined,
 
-  init(){
+  init(gsap){
     scrollTo(0, 0)
     this.blank = document.querySelectorAll('.hero__cell__blank');
 
