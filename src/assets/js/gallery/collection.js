@@ -53,7 +53,7 @@ const collection = {
       }
 
       this.showDetail(detailData.artObject);
-      this.animShowContent();
+      this.animContent(0, 1, 0);
 
     } catch (error) {
       this.handleFetchingError(error);
@@ -105,7 +105,7 @@ const collection = {
 
   onArtClick(image, data){
     image.addEventListener('click', ()=>{
-      this.animHideContent(data);
+      this.animContent(10, 0, 0, data);
       this.focusingArt(image);
     })
   },
@@ -129,6 +129,23 @@ const collection = {
     tl.to(".gallery__content__title", {yPercent: 0, opacity: 1, duration: 0.25}, "-=0.15");
     tl.to(".gallery__content__date", {yPercent: 0, opacity: 1, duration: 0.25}, "<");
     tl.to(".gallery__content__tag", {opacity: 1, duration: 0.25}, "<");
+  },
+
+  animContent(y, opacity, delay, data = undefined){
+    const tl = this.gsapAttribute.timeline({
+      delay: delay,
+      ease: "power1.inOut",
+      onComplete: () => {
+        if (data != undefined) {
+          this.getDetailsData(data.objectNumber)
+        }
+      }
+    });
+
+    tl.to(".gallery__content__description", {yPercent: y, opacity: opacity, duration: 0.25});
+    tl.to(".gallery__content__title", {yPercent: y, opacity: opacity, duration: 0.25}, "-=0.15");
+    tl.to(".gallery__content__date", {yPercent: y, opacity: opacity, duration: 0.25}, "<");
+    tl.to(".gallery__content__tag", {opacity: opacity, duration: 0.25}, "<");
   }
 }
 
