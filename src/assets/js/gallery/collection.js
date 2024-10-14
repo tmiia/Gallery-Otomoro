@@ -73,7 +73,10 @@ const collection = {
     const image = container.querySelector('img');
     image.src = data.webImage.url || "";
 
+    const btn = container.querySelector('.gallery__collection__art__image__btn');
+
     this.onArtClick(image, data);
+    this.onArtClick(btn, data);
 
     target.appendChild(container);
   },

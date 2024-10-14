@@ -59,12 +59,13 @@
     }
 
     &__art__image {
+      position: relative;
       transition: transform 0.3s ease-in-out;
       grid-column: span 2;
       width: 100%;
       cursor: pointer;
 
-      img{
+      &__item{
         transition: .3s ease-in-out;
 
         &.inactive{
@@ -77,6 +78,30 @@
           -webkit-filter: grayscale(0%);
           filter: grayscale(0%);
           opacity: 1;
+        }
+      }
+
+      &__btn{
+        align-items: center;
+        color: $color-grey;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        bottom: $spacing-md;
+        display: flex;
+        gap: $spacing-xs;
+        left: $spacing-md;
+        padding: $spacing-xs;
+        position: absolute;
+
+        &__icon{
+          width: pxToRem(12);
+          height: pxToRem(12);
+          transform: rotate(85deg);
+          -webkit-filter: grayscale(70%);
+          filter: grayscale(70%);
+          opacity: 0.3;
+          transition: .3s ease-in-out;
         }
       }
     }
@@ -115,6 +140,12 @@
         &:hover {
           transform: scale(1.05);
           width: 100%;
+
+          .gallery__collection__art__image__btn{
+            &__icon{
+              transform: rotate(85deg) translateY(5px);
+            }
+          }
         }
       }
     }
